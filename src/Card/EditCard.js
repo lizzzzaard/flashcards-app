@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { readCard, updateCard, readDeck } from "../utils/api";
+import CardForm from "./CardForm";
 
 /*
 The Edit Card screen has the following features:
@@ -93,28 +94,9 @@ function EditCard () {
             </div>
             <div>
                 <h1>Edit Card</h1>
-                <form>
-                    <label>Front</label>
-                        <textarea
-                            id="front"
-                            name="front"
-                            type="text"
-                            placeholder={card.front}
-                            onChange={changeHandler}
-                            value={card.front}
-                        />
-                    <label>Back</label>
-                        <textarea 
-                            id="back"
-                            name="back"
-                            type="text"
-                            placeholder={card.back}
-                            onChange={changeHandler}
-                            value={card.back}
-                        />
+                    <CardForm changeHandler={changeHandler} card={card} />
                     <button type="cancel" onClick={handleSave}>Cancel</button>
                     <button type="submit" onClick={handleSubmit}>Save</button>
-                </form>
             </div>
         </div>
     )

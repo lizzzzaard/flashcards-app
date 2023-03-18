@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { createCard, readDeck } from "../utils/api";
+import CardForm from "./CardForm";
 
 
 /*
@@ -62,14 +63,8 @@ async function handleSubmit(event) {
     event.preventDefault();
     await createCard(deckId, card);
     setCard(initialCardState);
+    history.go(0);
 }
-
-//const handleSave = () => {
-    //save card
-
-    //send user to decks/:deckId
-    //history.push(`/decks/${deckId}`)
-//}
 
 function handleDone (event) {
     event.preventDefault();
@@ -90,28 +85,9 @@ function handleDone (event) {
             </div>
             <div>
                 <h1>{deck.name}: Add Card</h1>
-                <form>
-                    <label>Front</label>
-                        <textarea
-                            id="front"
-                            name="front"
-                            type="text"
-                            placeholder={card.front}
-                            onChange={changeHandler}
-                            value={card.front}
-                        />
-                    <label>Back</label>
-                        <textarea 
-                            id="back"
-                            name="back"
-                            type="text"
-                            placeholder={card.back}
-                            onChange={changeHandler}
-                            value={card.back}
-                        />
+                    <CardForm changeHandler={changeHandler} card={card} />
                     <button type="cancel" onClick={handleDone}>Done</button>
                     <button type="submit" onClick={handleSubmit}>Save</button>
-                </form>
             </div>
         </div>
     )
